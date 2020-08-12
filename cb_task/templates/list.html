@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Product List</h2>
+    {% csrf_token %}
+        {% for i in data %}
+            <div class="col-md-12">
+                <div class="col-md-6">
+                    <p>Product Name : {{i.name}}</p>
+                </div>
+                <div class="col-md-6">
+                    <p>Product Quantity : {{i.quantity}}</p>
+                </div>
+            </div>
+        {% endfor %}
+{% endblock %}
