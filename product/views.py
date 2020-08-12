@@ -27,7 +27,7 @@ def login(request):
         if form.is_valid():
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
-            u = User.objects.filter(username=username).values()
+            u = User.objects.filter(username=username).values(password)
             if password == u[0]['password']:
                 request.session['logged_in'] = True
             else:
@@ -39,9 +39,17 @@ def login(request):
         form = loginForm()
     return render(request, 'login.html', {"form" : form})
 
+def logout(request):
+    del request.session['logged_in']
+    return redirect('login')
+
 def list(request):
     if request.session['logged_in'] == True:
         data = Product.objects.all().values()
         return render(request, 'list.html',  {"data": data})
     else:
         return redirect('login')
+
+def detail(request, pk):
+    data = Product.objects.filter(pk=pk)
+    return render(request, 'detail.html', {"data": data})

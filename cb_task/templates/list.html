@@ -1,16 +1,37 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Product List</h2>
-    {% csrf_token %}
-        {% for i in data %}
-            <div class="col-md-12">
-                <div class="col-md-6">
-                    <p>Product Name : {{i.name}}</p>
-                </div>
-                <div class="col-md-6">
-                    <p>Product Quantity : {{i.quantity}}</p>
-                </div>
+    <div class="container-fluid">
+        <br/>
+        <div class="row">
+            <div class="col-md-6" align="left">
+                <h2>Product List</h2>
             </div>
-        {% endfor %}
+            <div class="col-md-6" align="right">
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <br/>
+        {% csrf_token %}
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for i in data %}
+                    <tr>
+                        <td>{{i.name}}</td>
+                        <td>{{i.quantity}}</td>
+                        <td><a href="{% url 'detail' i.id %}">Link</a></td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 {% endblock %}
