@@ -2,7 +2,16 @@
 
 {% block content %}
     <div class="container-fluid">
-    <h2>Product Details</h2>
+        <br/>
+        <div class="row">
+            <div class="col-md-6" align="left">
+                <h2>Product Details</h2>
+            </div>
+            <div class="col-md-6" align="right">
+                <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+        <br/>
     {% csrf_token %}
         <div class="container">
             {% for i in data %}
